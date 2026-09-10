@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type GeneratedPost = {
   hook: string;
@@ -11,6 +11,11 @@ type GeneratedPost = {
   image_worth_it: boolean;
   image_prompt: string;
   model?: string;
+};
+
+type SelectedTrend = {
+  title?: string;
+  polish_angle?: string;
 };
 
 const starterTrends = [
@@ -25,6 +30,19 @@ export default function TextGenerator() {
   const [result, setResult] = useState<GeneratedPost | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    function onTrendSelected(event: Event) {
+      const detail = (event as CustomEvent<SelectedTrend>).detail;
+      if (detail?.title) setTrend(detail.title);
+      if (detail?.polish_angle) setContext(detail.polish_angle);
+      setResult(null);
+      setError("");
+    }
+
+    window.addEventListener("artur:trend-selected", onTrendSelected);
+    return () => window.removeEventListener("artur:trend-selected", onTrendSelected);
+  }, []);
 
   async function generate() {
     setLoading(true);
@@ -71,7 +89,7 @@ export default function TextGenerator() {
         rows={3}
       />
 
-      <label className="fieldlabel" htmlFor="context-input">Optional angle or context</label>
+      <label className="fieldlabel" htmlFor="context-input">Optional Polish angle or context</label>
       <input
         id="context-input"
         className="textinput"
