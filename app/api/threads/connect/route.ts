@@ -8,10 +8,7 @@ const scopes = [
   "threads_basic",
   "threads_content_publish",
   "threads_keyword_search",
-  "threads_profile_discovery",
-  "threads_read_replies",
-  "threads_manage_replies",
-  "threads_manage_insights"
+  "threads_profile_discovery"
 ];
 
 export async function GET(request: NextRequest) {
@@ -19,7 +16,7 @@ export async function GET(request: NextRequest) {
   const origin = new URL(request.url).origin;
 
   if (!appId || !process.env.THREADS_APP_SECRET) {
-    return NextResponse.redirect(new URL("/?threads_error=missing_meta_config#settings", origin));
+    return NextResponse.redirect(new URL("/?threads_error=missing_meta_config#threads-account", origin));
   }
 
   const state = crypto.randomBytes(24).toString("base64url");
