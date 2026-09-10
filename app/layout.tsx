@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./trend.css";
 
 export const metadata: Metadata = {
   title: "Artur Threads AI",
