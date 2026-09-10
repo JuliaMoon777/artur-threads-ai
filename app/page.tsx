@@ -1,3 +1,5 @@
+import TextGenerator from "../components/TextGenerator";
+
 const leads = [
   ["@studioluna.krk", "Kraków", 94, "Nowy lokalny biznes beauty, wysoka szansa na prostą stronę usługową."],
   ["@remonty_pro", "Katowice", 88, "Rozważa stronę firmową i pyta, czy ma sens dla małej firmy."],
@@ -34,7 +36,13 @@ export default function Home() {
           <section className="card" id="trends"><div className="cardhead"><div><span className="eyebrow">USA TREND RADAR</span><h2>What is moving</h2></div><b>TOP + RECENT</b></div>{trends.map(([title,score,angle])=><div className="trend" key={String(title)}><strong>{title}</strong><span>{angle}</span><em>{score}/100</em></div>)}</section>
         </div>
 
-        <section className="card" id="content"><div className="cardhead"><div><span className="eyebrow">POLISH TEXT ENGINE</span><h2>Today’s publishing queue</h2></div><button className="smallbtn">Generate post</button></div><div className="queue"><div><time>09:15</time><span>Opinion</span><strong>AI nie zabierze pracy dobrym designerom.</strong><b>Published</b></div><div><time>14:00</time><span>Mini case</span><strong>Mała firma nie potrzebuje strony z 20 podstronami.</strong><b>Scheduled</b></div><div><time>19:30</time><span>Discussion</span><strong>Ile naprawdę powinna kosztować dobra strona?</strong><b>Draft</b></div></div></section>
+        <section className="card contentengine" id="content">
+          <div className="cardhead"><div><span className="eyebrow">POLISH TEXT ENGINE</span><h2>US trend → original Polish Thread</h2></div><b>LIVE OPENAI</b></div>
+          <p>Choose or paste a US-market idea. The AI extracts the mechanism, rewrites it for Polish business owners and decides whether an image is worth adding.</p>
+          <TextGenerator />
+        </section>
+
+        <section className="card queuecard"><div className="cardhead"><div><span className="eyebrow">PUBLISHING QUEUE</span><h2>Today</h2></div><b>3 + optional 4th</b></div><div className="queue"><div><time>09:15</time><span>Opinion</span><strong>AI nie zabierze pracy dobrym designerom.</strong><b>Published</b></div><div><time>14:00</time><span>Mini case</span><strong>Mała firma nie potrzebuje strony z 20 podstronami.</strong><b>Scheduled</b></div><div><time>19:30</time><span>Discussion</span><strong>Ile naprawdę powinna kosztować dobra strona?</strong><b>Draft</b></div></div></section>
 
         <div className="grid2">
           <section className="card" id="images"><span className="eyebrow">OPTIONAL VISUALS</span><h2>GPT Image 2.5</h2><p>Generate an image only when AI predicts it will materially strengthen the post.</p><div className="imagebox">✦<small>Text first. Visual only when useful.</small></div></section>
